@@ -4,6 +4,7 @@ import { t } from "i18next";
 import React from "react";
 import { FiZoomIn } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { Star1 } from "iconsax-react";
 
 //internal import
 
@@ -33,15 +34,16 @@ const VendorTable = ({ customers }) => {
             <TableCell>
               <span className="font-semibold uppercase text-xs">
                 {" "}
-                {user?._id?.substring(20, 24)}
+                <span className="text-sm">{user.store_name}</span>
+                {/* // {user?._id?.substring(20, 24)} */}
               </span>
             </TableCell>
             <TableCell>
-              <span className="text-sm">{user.store_name}</span>
+              <span className="text-sm">{user.store_type}</span>
             </TableCell>
             <TableCell>
-              <span className="text-sm">
-                {user.averageRating}
+              <span className="text-sm flex items-center">
+                {user.averageRating} <Star1 className="w-[1rem] ml-1" />
               </span>
             </TableCell>
             <TableCell>
@@ -50,12 +52,10 @@ const VendorTable = ({ customers }) => {
             <TableCell>
               <span className="text-sm font-medium">{user.vendor_phone}</span>
             </TableCell>
-
             <TableCell>
               <div className="flex justify-end text-right">
                 <div className="p-2 cursor-pointer text-gray-400 hover:text-emerald-600">
-                  {" "}
-                  <Link to={`/customer-order/${user._id}`}>
+                  <Link to={`/vendor-order/:${user._id}`}>
                     <Tooltip
                       id="view"
                       Icon={FiZoomIn}
@@ -64,7 +64,6 @@ const VendorTable = ({ customers }) => {
                     />
                   </Link>
                 </div>
-
                 <EditDeleteButton
                   title={user.name}
                   id={user._id}
